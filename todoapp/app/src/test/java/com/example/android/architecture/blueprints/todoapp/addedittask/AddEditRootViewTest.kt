@@ -35,4 +35,15 @@ class AddEditRootViewTest {
     val textView: TextView? = mAddEditRootView.findSnackbarTextView()
     assertThat(textView, `is`(notNullValue()))
   }
+
+  @Test
+  fun `empty description should show error`() {
+    // when
+    mAddEditRootView.add_task_title.setText("Title")
+    mAddEditRootView.done_fab.performClick()
+
+    // then
+    val textView: TextView? = mAddEditRootView.findSnackbarTextView()
+    assertThat(textView, `is`(notNullValue()))
+  }
 }

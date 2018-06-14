@@ -18,7 +18,7 @@ class AddEditRootView @JvmOverloads constructor(
   }
 
   private fun doneClicked() {
-    if (add_task_title.text.isNullOrEmpty()) {
+    if (add_task_title.text.isNullOrEmpty() || add_task_description.text.isNullOrEmpty()) {
       Snackbar.make(this, R.string.empty_task_message, Snackbar.LENGTH_LONG)
           .show()
       return
