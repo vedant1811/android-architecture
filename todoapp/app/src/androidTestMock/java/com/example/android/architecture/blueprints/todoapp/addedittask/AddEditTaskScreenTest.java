@@ -78,7 +78,7 @@ public class AddEditTaskScreenTest {
         onView(withId(R.id.add_task_title)).perform(clearText());
         onView(withId(R.id.add_task_description)).perform(clearText());
         // Try to save the task
-        onView(withId(R.id.fab_edit_task_done)).perform(click());
+        onView(withId(R.id.done_fab)).perform(click());
 
         // Verify that the activity is still displayed (a correct task would close it).
         onView(withId(R.id.add_task_title)).check(matches(isDisplayed()));

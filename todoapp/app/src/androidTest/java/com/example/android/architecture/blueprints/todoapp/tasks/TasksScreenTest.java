@@ -177,7 +177,7 @@ public class TasksScreenTest {
                 closeSoftKeyboard()); // Type new task description and close the keyboard
 
         // Save the task
-        onView(withId(R.id.fab_edit_task_done)).perform(click());
+        onView(withId(R.id.done_fab)).perform(click());
 
         // Verify task is displayed on screen in the task list.
         onView(withItemText(editTaskTitle)).check(matches(isDisplayed()));
@@ -504,7 +504,7 @@ public class TasksScreenTest {
                 closeSoftKeyboard()); // Type new task description and close the keyboard
 
         // Save the task
-        onView(withId(R.id.fab_edit_task_done)).perform(click());
+        onView(withId(R.id.done_fab)).perform(click());
 
         // Verify task is displayed on screen in the task list.
         onView(withItemText(TITLE2)).check(matches(isDisplayed()));
@@ -539,7 +539,7 @@ public class TasksScreenTest {
                 closeSoftKeyboard()); // Type new task description and close the keyboard
 
         // Save the task
-        onView(withId(R.id.fab_edit_task_done)).perform(click());
+        onView(withId(R.id.done_fab)).perform(click());
     }
 
     private void clickCheckBoxForTask(String title) {

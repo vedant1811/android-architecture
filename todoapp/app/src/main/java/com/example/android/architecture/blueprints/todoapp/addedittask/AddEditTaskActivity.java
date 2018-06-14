@@ -45,7 +45,7 @@ public class AddEditTaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.addtask_act);
+        setContentView(R.layout.add_edit_task_activity);
 
         // Set up the toolbar.
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -55,7 +55,7 @@ public class AddEditTaskActivity extends AppCompatActivity {
         mActionBar.setDisplayShowHomeEnabled(true);
 
         AddEditTaskFragment addEditTaskFragment =
-                (AddEditTaskFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+                (AddEditTaskFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame);
 
         String taskId = getIntent().getStringExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID);
 
@@ -65,7 +65,7 @@ public class AddEditTaskActivity extends AppCompatActivity {
             addEditTaskFragment = AddEditTaskFragment.newInstance();
 
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    addEditTaskFragment, R.id.contentFrame);
+                    addEditTaskFragment, R.id.content_frame);
         }
 
         boolean shouldLoadDataFromRepo = true;

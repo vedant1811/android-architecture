@@ -63,12 +63,12 @@ public class TasksActivity extends AppCompatActivity {
         }
 
         TasksFragment tasksFragment =
-                (TasksFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+                (TasksFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame);
         if (tasksFragment == null) {
             // Create the fragment
             tasksFragment = TasksFragment.newInstance();
             ActivityUtils.addFragmentToActivity(
-                    getSupportFragmentManager(), tasksFragment, R.id.contentFrame);
+                    getSupportFragmentManager(), tasksFragment, R.id.content_frame);
         }
 
         // Create the presenter

@@ -49,13 +49,13 @@ public class TaskDetailActivity extends AppCompatActivity {
         String taskId = getIntent().getStringExtra(EXTRA_TASK_ID);
 
         TaskDetailFragment taskDetailFragment = (TaskDetailFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.contentFrame);
+                .findFragmentById(R.id.content_frame);
 
         if (taskDetailFragment == null) {
             taskDetailFragment = TaskDetailFragment.newInstance(taskId);
 
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    taskDetailFragment, R.id.contentFrame);
+                    taskDetailFragment, R.id.content_frame);
         }
 
         // Create the presenter

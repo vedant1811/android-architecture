@@ -70,7 +70,7 @@ public class AddEditTaskFragment extends Fragment implements AddEditTaskContract
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        FloatingActionButton fab = getActivity().findViewById(R.id.fab_edit_task_done);
+        FloatingActionButton fab = getActivity().findViewById(R.id.done_fab);
         fab.setImageResource(R.drawable.ic_done);
         fab.setOnClickListener(__ -> mPresenter.saveTask(mTitle.getText().toString(),
                 mDescription.getText().toString()));
