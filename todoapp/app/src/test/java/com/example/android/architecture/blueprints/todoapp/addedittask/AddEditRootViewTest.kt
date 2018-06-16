@@ -4,6 +4,7 @@ import android.app.Activity
 import android.widget.TextView
 import com.example.android.architecture.blueprints.todoapp.addedittask.components.AddEditRootView
 import com.example.android.architecture.blueprints.todoapp.base.getTasksRepository
+import com.example.android.architecture.blueprints.todoapp.data.Task
 import com.example.android.architecture.blueprints.todoapp.utils.findSnackbarTextView
 import com.example.android.architecture.blueprints.todoapp.utils.getTasksInRepo
 import kotlinx.android.synthetic.main.add_edit_root_view.view.*
@@ -58,6 +59,26 @@ class AddEditRootViewTest {
 
     // then
     assertSave()
+  }
+
+  @Test
+  fun `should display existing task`() {
+    // given
+    val task = createTask()
+
+    // when
+    mAddEditRootView.showTaskWithId(task.id)
+
+    // then
+    assertThat(mAddEditRootView.add_task_title.text.toString(), equalTo(task.title))
+    assertThat(mAddEditRootView.add_task_description.text.toString(), equalTo(task.description))
+  }
+
+  private fun createTask(): Task {
+    val task = Task("title", "description")
+    activity.getTasksRepository().saveTask(task)
+
+    return task
   }
 
   private fun assertSave() {

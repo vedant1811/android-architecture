@@ -9,15 +9,33 @@ import android.widget.FrameLayout
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.base.getTasksRepository
 import com.example.android.architecture.blueprints.todoapp.data.Task
+import com.google.common.base.Optional
 import kotlinx.android.synthetic.main.add_edit_root_view.view.*
 
 class AddEditRootView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
+
+  /**
+   * `null` if this a new task, non-`null` if it's an existing task
+   */
+  private var taskId: String? = null
+
   init {
     View.inflate(context, R.layout.add_edit_root_view, this)
 
     done_fab.setOnClickListener{ _ -> doneClicked() }
+  }
+
+  fun showTaskWithId(id: String) {
+    taskId = id
+
+    context.getTasksRepository().getTask(id)
+        .map(Optional<Task>::get) // will throw an error if id is incorrect
+        .subscribe {
+          add_task_title.setText(it.title)
+          add_task_description.setText(it.description)
+        }
   }
 
   private fun doneClicked() {
