@@ -70,7 +70,7 @@ public class StatisticsScreenTest {
     public void intentWithStubbedTaskId() {
         // Given some tasks
         TasksRepository.destroyInstance();
-        TasksRepository repository = Injection.provideTasksRepository(InstrumentationRegistry.getContext());
+        TasksRepository repository = Injection.INSTANCE.provideTasksRepository(InstrumentationRegistry.getContext());
         repository.saveTask(new Task("Title1", "", false));
         repository.saveTask(new Task("Title2", "", true));
 

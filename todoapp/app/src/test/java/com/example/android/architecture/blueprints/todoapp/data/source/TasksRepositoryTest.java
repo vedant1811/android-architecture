@@ -81,15 +81,15 @@ public class TasksRepositoryTest {
         MockitoAnnotations.initMocks(this);
 
         // Get a reference to the class under test
-        mTasksRepository = TasksRepository.getInstance(
-                mTasksRemoteDataSource, mTasksLocalDataSource);
+//        mTasksRepository = TasksRepository.getInstance(
+//                mTasksRemoteDataSource, mTasksLocalDataSource);
 
         mTasksTestSubscriber = new TestSubscriber<>();
     }
 
     @After
     public void destroyRepositoryInstance() {
-        TasksRepository.destroyInstance();
+//        TasksRepository.destroyInstance();
     }
 
     @Test

@@ -34,9 +34,6 @@ import io.reactivex.Flowable;
  * Implementation of the data source that adds a latency simulating network.
  */
 public class TasksRemoteDataSource implements TasksDataSource {
-
-    private static TasksRemoteDataSource INSTANCE;
-
     private static final int SERVICE_LATENCY_IN_MILLIS = 5000;
 
     private final static Map<String, Task> TASKS_SERVICE_DATA;
@@ -45,17 +42,6 @@ public class TasksRemoteDataSource implements TasksDataSource {
         TASKS_SERVICE_DATA = new LinkedHashMap<>(2);
         addTask("Build tower in Pisa", "Ground looks good, no foundation work required.");
         addTask("Finish bridge in Tacoma", "Found awesome girders at half the cost!");
-    }
-
-    public static TasksRemoteDataSource getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new TasksRemoteDataSource();
-        }
-        return INSTANCE;
-    }
-
-    // Prevent direct instantiation.
-    private TasksRemoteDataSource() {
     }
 
     private static void addTask(String title, String description) {

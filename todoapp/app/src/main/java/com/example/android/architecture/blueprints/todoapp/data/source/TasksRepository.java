@@ -41,9 +41,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class TasksRepository implements TasksDataSource {
 
-    @Nullable
-    private static TasksRepository INSTANCE = null;
-
     @NonNull
     private final TasksDataSource mTasksRemoteDataSource;
 
@@ -64,34 +61,14 @@ public class TasksRepository implements TasksDataSource {
     @VisibleForTesting
     boolean mCacheIsDirty = false;
 
-    // Prevent direct instantiation.
-    private TasksRepository(@NonNull TasksDataSource tasksRemoteDataSource,
+    /**
+     * @param tasksRemoteDataSource the backend data source
+     * @param tasksLocalDataSource  the device storage data source
+     */
+    public TasksRepository(@NonNull TasksDataSource tasksRemoteDataSource,
                             @NonNull TasksDataSource tasksLocalDataSource) {
         mTasksRemoteDataSource = checkNotNull(tasksRemoteDataSource);
         mTasksLocalDataSource = checkNotNull(tasksLocalDataSource);
-    }
-
-    /**
-     * Returns the single instance of this class, creating it if necessary.
-     *
-     * @param tasksRemoteDataSource the backend data source
-     * @param tasksLocalDataSource  the device storage data source
-     * @return the {@link TasksRepository} instance
-     */
-    public static TasksRepository getInstance(@NonNull TasksDataSource tasksRemoteDataSource,
-                                              @NonNull TasksDataSource tasksLocalDataSource) {
-        if (INSTANCE == null) {
-            INSTANCE = new TasksRepository(tasksRemoteDataSource, tasksLocalDataSource);
-        }
-        return INSTANCE;
-    }
-
-    /**
-     * Used to force {@link #getInstance(TasksDataSource, TasksDataSource)} to create a new instance
-     * next time it's called.
-     */
-    public static void destroyInstance() {
-        INSTANCE = null;
     }
 
     /**

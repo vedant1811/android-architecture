@@ -79,10 +79,10 @@ public class AddEditTaskActivity extends AppCompatActivity {
         // Create the presenter
         mAddEditTaskPresenter = new AddEditTaskPresenter(
                 taskId,
-                Injection.provideTasksRepository(getApplicationContext()),
+                Injection.INSTANCE.provideTasksRepository(getApplicationContext()),
                 addEditTaskFragment,
                 shouldLoadDataFromRepo,
-                Injection.provideSchedulerProvider());
+                Injection.INSTANCE.provideSchedulerProvider());
     }
 
     private void setToolbarTitle(@Nullable String taskId) {
