@@ -74,8 +74,29 @@ class AddEditRootViewTest {
     assertThat(mAddEditRootView.add_task_description.text.toString(), equalTo(task.description))
   }
 
+  @Test
+  fun `should update existing task`() {
+    // given
+    val task = createTask()
+    mAddEditRootView.showTaskWithId(task.id)
+    val newTitle = "new title"
+    val newDescription = "new desc"
+
+    // when
+    mAddEditRootView.add_task_title.setText(newTitle)
+    mAddEditRootView.add_task_description.setText(newDescription)
+    mAddEditRootView.done_fab.performClick()
+
+    // then
+    val savedTask = getTasksInRepo().first()
+    assertThat(savedTask.title, equalTo(newTitle))
+    assertThat(savedTask.description, equalTo(newDescription))
+    assertThat(savedTask.isCompleted, equalTo(task.isCompleted))
+    assertSave()
+  }
+
   private fun createTask(): Task {
-    val task = Task("title", "description")
+    val task = Task("title", "description", true)
     activity.getTasksRepository().saveTask(task)
 
     return task

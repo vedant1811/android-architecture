@@ -11,6 +11,7 @@ import com.example.android.architecture.blueprints.todoapp.base.getTasksReposito
 import com.example.android.architecture.blueprints.todoapp.data.Task
 import com.google.common.base.Optional
 import kotlinx.android.synthetic.main.add_edit_root_view.view.*
+import java.util.*
 
 class AddEditRootView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -19,7 +20,7 @@ class AddEditRootView @JvmOverloads constructor(
   /**
    * `null` if this a new task, non-`null` if it's an existing task
    */
-  private var taskId: String? = null
+  private var mTask: Task? = null
 
   init {
     View.inflate(context, R.layout.add_edit_root_view, this)
@@ -28,18 +29,23 @@ class AddEditRootView @JvmOverloads constructor(
   }
 
   fun showTaskWithId(id: String) {
-    taskId = id
-
     context.getTasksRepository().getTask(id)
         .map(Optional<Task>::get) // will throw an error if id is incorrect
         .subscribe {
+          mTask = it
           add_task_title.setText(it.title)
           add_task_description.setText(it.description)
         }
   }
 
   private fun doneClicked() {
-    val task = Task(add_task_title.text.toString(), add_task_description.text.toString())
+    val task = Task(
+        add_task_title.text.toString(),
+        add_task_description.text.toString(),
+        mTask?.id ?: UUID.randomUUID().toString(),
+        mTask?.isCompleted ?: false
+    )
+
     if (task.isEmpty) {
       Snackbar.make(this, R.string.empty_task_message, Snackbar.LENGTH_LONG)
           .show()
