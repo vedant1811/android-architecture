@@ -3,7 +3,9 @@ package com.example.android.architecture.blueprints.todoapp.addedittask
 import android.app.Activity
 import android.widget.TextView
 import com.example.android.architecture.blueprints.todoapp.addedittask.components.AddEditRootView
+import com.example.android.architecture.blueprints.todoapp.base.getTasksRepository
 import com.example.android.architecture.blueprints.todoapp.utils.findSnackbarTextView
+import com.example.android.architecture.blueprints.todoapp.utils.getTasksInRepo
 import kotlinx.android.synthetic.main.add_edit_root_view.view.*
 
 import org.hamcrest.Matchers.*
@@ -19,15 +21,16 @@ import org.robolectric.RobolectricTestRunner
 class AddEditRootViewTest {
 
   private lateinit var mAddEditRootView: AddEditRootView
+  private lateinit var activity: Activity
 
   @Before
   fun setup() {
-    val activity = Robolectric.setupActivity(Activity::class.java)
+    activity = Robolectric.setupActivity(Activity::class.java)
     mAddEditRootView = AddEditRootView(activity)
   }
 
   @Test
-  fun `empty title should show error`() {
+  fun `empty title and description should show error`() {
     // when
     mAddEditRootView.done_fab.performClick()
 
@@ -37,13 +40,32 @@ class AddEditRootViewTest {
   }
 
   @Test
-  fun `empty description should show error`() {
+  fun `empty description should save`() {
     // when
     mAddEditRootView.add_task_title.setText("Title")
     mAddEditRootView.done_fab.performClick()
 
     // then
+    assertSave()
+  }
+
+  @Test
+  fun `should save new task to repo and finish activity`() {
+    // when
+    mAddEditRootView.add_task_title.setText("Title")
+    mAddEditRootView.add_task_description.setText("Description")
+    mAddEditRootView.done_fab.performClick()
+
+    // then
+    assertSave()
+  }
+
+  private fun assertSave() {
     val textView: TextView? = mAddEditRootView.findSnackbarTextView()
-    assertThat(textView, `is`(notNullValue()))
+    assertThat(textView, `is`(nullValue()))
+
+    assertThat(getTasksInRepo().count(), `is`(1))
+
+    assertThat(activity.isFinishing, `is`(true))
   }
 }

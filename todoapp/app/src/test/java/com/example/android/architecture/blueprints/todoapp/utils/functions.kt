@@ -5,6 +5,15 @@ import android.support.design.widget.Snackbar
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.android.architecture.blueprints.todoapp.base.getTasksRepository
+import com.example.android.architecture.blueprints.todoapp.data.Task
+import org.robolectric.RuntimeEnvironment
+
+
+fun getTasksInRepo(): List<Task> =
+    RuntimeEnvironment.application.getTasksRepository()
+        .tasks
+        .blockingFirst()
 
 /**
  * @return a TextView if a snackbar is shown anywhere in the view hierarchy.

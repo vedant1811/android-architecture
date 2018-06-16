@@ -92,8 +92,8 @@ public class TasksRepository implements TasksDataSource {
             // Query the local storage if available. If not, query the network.
             Flowable<List<Task>> localTasks = getAndCacheLocalTasks();
             return Flowable.concat(localTasks, remoteTasks)
-                    .filter(tasks -> !tasks.isEmpty())
-                    .firstOrError()
+//                    .filter(tasks -> !tasks.isEmpty())
+                    .firstOrError() // TODO: check if this is viable
                     .toFlowable();
         }
     }
