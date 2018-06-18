@@ -28,9 +28,12 @@ class AddEditRootView @JvmOverloads constructor(
     done_fab.setOnClickListener{ _ -> doneClicked() }
   }
 
-  fun showTaskWithId(id: String) {
+  fun showTaskWithId(id: String?) {
+    id ?: return
+
     context.getTasksRepository().getTask(id)
         .map(Optional<Task>::get) // will throw an error if id is incorrect
+        // TODO: show error messages
         .subscribe {
           mTask = it
           add_task_title.setText(it.title)

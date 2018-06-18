@@ -124,7 +124,7 @@ public class AddEditTaskScreenTest {
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation()
                 .getTargetContext(), AddEditTaskActivity.class);
 
-        intent.putExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId);
+        intent.putExtra(AddEditTaskActivity.ARGUMENT_EDIT_TASK_ID, taskId);
         mActivityTestRule.launchActivity(intent);
     }
 
