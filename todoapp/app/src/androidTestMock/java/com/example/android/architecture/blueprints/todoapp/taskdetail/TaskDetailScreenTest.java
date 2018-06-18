@@ -23,9 +23,9 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.filters.LargeTest;
 
-import com.example.android.architecture.blueprints.todoapp.Injection;
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.TestUtils;
+import com.example.android.architecture.blueprints.todoapp.base.HelpersKt;
 import com.example.android.architecture.blueprints.todoapp.data.Task;
 import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository;
 import com.example.android.architecture.blueprints.todoapp.data.source.local.TasksLocalDataSource;
@@ -99,9 +99,7 @@ public class TaskDetailScreenTest {
      */
     private void startActivityWithWithStubbedTask(Task task) {
         // Add a task stub to the fake service api layer.
-        TasksRepository.destroyInstance();
-        TasksLocalDataSource.destroyInstance();
-        Injection.INSTANCE.provideTasksRepository(InstrumentationRegistry.getTargetContext()).saveTask(task);
+        HelpersKt.getTasksRepository(InstrumentationRegistry.getTargetContext()).saveTask(task);
 
         // Lazily start the Activity from the ActivityTestRule this time to inject the start Intent
         Intent startIntent = new Intent();

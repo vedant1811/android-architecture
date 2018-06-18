@@ -28,7 +28,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.example.android.architecture.blueprints.todoapp.Injection;
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.statistics.StatisticsActivity;
 import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
@@ -72,10 +71,10 @@ public class TasksActivity extends AppCompatActivity {
         }
 
         // Create the presenter
-        mTasksPresenter = new TasksPresenter(
-                Injection.INSTANCE.provideTasksRepository(getApplicationContext()),
-                tasksFragment,
-                Injection.INSTANCE.provideSchedulerProvider());
+//        mTasksPresenter = new TasksPresenter(
+//                Injection.INSTANCE.provideTasksRepository(getApplicationContext()),
+//                tasksFragment,
+//                Injection.INSTANCE.provideSchedulerProvider());
 
         // Load previously saved state, if available.
         if (savedInstanceState != null) {

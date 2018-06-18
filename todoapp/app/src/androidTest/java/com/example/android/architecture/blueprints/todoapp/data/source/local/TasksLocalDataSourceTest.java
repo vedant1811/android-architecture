@@ -61,10 +61,9 @@ public class TasksLocalDataSourceTest {
 
     @Before
     public void setup() {
-        TasksLocalDataSource.destroyInstance();
         mSchedulerProvider = new ImmediateSchedulerProvider();
 
-        mLocalDataSource = TasksLocalDataSource.getInstance(
+        mLocalDataSource = new TasksLocalDataSource(
                 InstrumentationRegistry.getTargetContext(), mSchedulerProvider);
     }
 

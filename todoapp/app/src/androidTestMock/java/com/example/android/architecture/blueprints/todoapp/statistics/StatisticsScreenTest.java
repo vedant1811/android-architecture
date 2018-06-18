@@ -18,12 +18,12 @@ package com.example.android.architecture.blueprints.todoapp.statistics;
 
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.filters.LargeTest;
 
-import com.example.android.architecture.blueprints.todoapp.Injection;
 import com.example.android.architecture.blueprints.todoapp.R;
+import com.example.android.architecture.blueprints.todoapp.base.HelpersKt;
 import com.example.android.architecture.blueprints.todoapp.data.Task;
 import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository;
 import com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailActivity;
@@ -69,8 +69,7 @@ public class StatisticsScreenTest {
     @Before
     public void intentWithStubbedTaskId() {
         // Given some tasks
-        TasksRepository.destroyInstance();
-        TasksRepository repository = Injection.INSTANCE.provideTasksRepository(InstrumentationRegistry.getContext());
+        TasksRepository repository = HelpersKt.getTasksRepository(InstrumentationRegistry.getContext());
         repository.saveTask(new Task("Title1", "", false));
         repository.saveTask(new Task("Title2", "", true));
 

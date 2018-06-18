@@ -30,6 +30,7 @@ import android.view.View;
 
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.TestUtils;
+import com.example.android.architecture.blueprints.todoapp.base.HelpersKt;
 import com.example.android.architecture.blueprints.todoapp.data.FakeTasksRemoteDataSource;
 import com.example.android.architecture.blueprints.todoapp.data.Task;
 import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository;
@@ -102,8 +103,8 @@ public class AddEditTaskScreenTest {
     @Test
     public void toolbarTitle_editTask_persistsRotation() {
         // Put a task in the repository and start the activity to edit it
-        TasksRepository.destroyInstance();
-        FakeTasksRemoteDataSource.getInstance().addTasks(new Task("Title1", "", TASK_ID, false));
+        HelpersKt.getTasksRepository(InstrumentationRegistry.getTargetContext())
+                .saveTask(new Task("Title1", "", TASK_ID, false));
         launchNewTaskActivity(TASK_ID);
 
         // Check that the toolbar shows the correct title
