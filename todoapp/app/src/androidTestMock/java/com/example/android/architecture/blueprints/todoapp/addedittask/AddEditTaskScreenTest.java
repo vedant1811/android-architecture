@@ -44,9 +44,11 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.android.architecture.blueprints.todoapp.R.id.toolbar;
 
 /**
@@ -115,6 +117,26 @@ public class AddEditTaskScreenTest {
 
         // check that the toolbar title is persisted
         onView(withId(toolbar)).check(matches(withToolbarTitle(R.string.edit_task)));
+    }
+
+    @Test
+    public void taskData_persistsRotation() {
+        final String title = "title";
+        final String description = "desc";
+
+        // Launch activity to add a new task
+        launchNewTaskActivity(null);
+
+        // Set data
+        onView(withId(R.id.add_task_title)).perform(replaceText(title));
+        onView(withId(R.id.add_task_description)).perform(replaceText(description));
+
+        // Rotate activity
+        TestUtils.rotateOrientation(mActivityTestRule.getActivity());
+
+        // Check that the data is persisted
+        onView(withId(R.id.add_task_title)).check(matches(withText(title)));
+        onView(withId(R.id.add_task_description)).check(matches(withText(description)));
     }
 
     /**

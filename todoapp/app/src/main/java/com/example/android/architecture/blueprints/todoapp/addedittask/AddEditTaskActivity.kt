@@ -50,14 +50,6 @@ class AddEditTaskActivity : AppCompatActivity() {
 
     setToolbarTitle(taskId)
     add_edit_root_view.showTaskWithId(taskId)
-
-    var shouldLoadDataFromRepo = true
-
-    // Prevent the presenter from loading data from the repository if this is a config change.
-    if (savedInstanceState != null) {
-      // Data might not have loaded when the config change happen, so we saved the state.
-      shouldLoadDataFromRepo = savedInstanceState.getBoolean(SHOULD_LOAD_DATA_FROM_REPO_KEY)
-    }
   }
 
   private fun setToolbarTitle(taskId: String?) {
@@ -68,23 +60,14 @@ class AddEditTaskActivity : AppCompatActivity() {
     }
   }
 
-  override fun onSaveInstanceState(outState: Bundle) {
-    // Save the state so that next time we know if we need to refresh data.
-//    outState.putBoolean(SHOULD_LOAD_DATA_FROM_REPO_KEY, mAddEditTaskPresenter!!.isDataMissing)
-    super.onSaveInstanceState(outState)
-  }
-
   override fun onSupportNavigateUp(): Boolean {
     onBackPressed()
     return true
   }
 
   companion object {
+    const val REQUEST_ADD_TASK = 1
 
-    val REQUEST_ADD_TASK = 1
-
-    val SHOULD_LOAD_DATA_FROM_REPO_KEY = "SHOULD_LOAD_DATA_FROM_REPO_KEY"
-
-    @JvmField val ARGUMENT_EDIT_TASK_ID = "ARGUMENT_EDIT_TASK_ID"
+    const val ARGUMENT_EDIT_TASK_ID = "ARGUMENT_EDIT_TASK_ID"
   }
 }

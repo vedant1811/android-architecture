@@ -29,9 +29,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.android.architecture.blueprints.todoapp.R;
+import com.example.android.architecture.blueprints.todoapp.base.HelpersKt;
 import com.example.android.architecture.blueprints.todoapp.statistics.StatisticsActivity;
 import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
 import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingResource;
+import com.example.android.architecture.blueprints.todoapp.util.schedulers.SchedulerProvider;
 
 public class TasksActivity extends AppCompatActivity {
 
@@ -71,10 +73,10 @@ public class TasksActivity extends AppCompatActivity {
         }
 
         // Create the presenter
-//        mTasksPresenter = new TasksPresenter(
-//                Injection.INSTANCE.provideTasksRepository(getApplicationContext()),
-//                tasksFragment,
-//                Injection.INSTANCE.provideSchedulerProvider());
+        mTasksPresenter = new TasksPresenter(
+                HelpersKt.getTasksRepository(this),
+                tasksFragment,
+                new SchedulerProvider());
 
         // Load previously saved state, if available.
         if (savedInstanceState != null) {

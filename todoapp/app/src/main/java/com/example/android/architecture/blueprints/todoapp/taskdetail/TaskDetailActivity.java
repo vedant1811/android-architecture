@@ -22,7 +22,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.android.architecture.blueprints.todoapp.R;
+import com.example.android.architecture.blueprints.todoapp.base.HelpersKt;
 import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
+import com.example.android.architecture.blueprints.todoapp.util.schedulers.SchedulerProvider;
 
 /**
  * Displays task details screen.
@@ -58,11 +60,11 @@ public class TaskDetailActivity extends AppCompatActivity {
         }
 
         // Create the presenter
-//        new TaskDetailPresenter(
-//                taskId,
-//                Injection.INSTANCE.provideTasksRepository(getApplicationContext()),
-//                taskDetailFragment,
-//                Injection.INSTANCE.provideSchedulerProvider());
+        new TaskDetailPresenter(
+                taskId,
+                HelpersKt.getTasksRepository(this),
+                taskDetailFragment,
+                new SchedulerProvider());
     }
 
     @Override
